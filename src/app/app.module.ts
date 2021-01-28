@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
+import { TodoListItemComponent } from './todo-list/todo-list-item/todo-list-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
-    TodoListComponent
+    TodoListComponent,
+    TodoListItemComponent
   ],
   imports: [
     BrowserModule,
