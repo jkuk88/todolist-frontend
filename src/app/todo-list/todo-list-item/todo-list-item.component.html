@@ -1,1 +1,47 @@
-<p>todo-list-item works!</p>
+<div class="card mb-2 mt-2" style="width: 100%;">
+  <div class="card-body">
+    <div class="row align-items-center">
+      <div class="col-auto">
+        <div *ngIf="!isEditMode" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()" (click)="onClick()">
+          <i
+            *ngIf="!isMouseOver && toDoListItem.isCompleted"
+            class="bi bi-check-circle-fill text-success"
+            style="font-size: 50px; line-height: 0">
+          </i>
+          <i
+            *ngIf="!isMouseOver && !toDoListItem.isCompleted"
+            class="bi bi-circle text-dark"
+            style="font-size: 50px; line-height: 0;">
+          </i>
+          <i
+            *ngIf="isMouseOver"
+            class="bi bi-check-circle text-muted"
+            style="font-size: 50px; line-height: 0; text-shadow: 0 0 5px rgb(185, 185, 185);">
+          </i>
+        </div>
+        <div *ngIf="isEditMode">
+          <div class="btn-group">
+            <button (click)="onSaveClick()" type="button" class="btn btn-primary">Save</button>
+            <button *ngIf="this.toDoListItem.id != null" (click)="onCancelClick()" type="button" class="btn btn-secondary">Cancel</button>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <p *ngIf="!isEditMode" class="card-text">{{ toDoListItem.description }}</p>
+        <input (keydown.enter)="onSaveClick()" *ngIf="isEditMode" class="form-control" type="text" [(ngModel)]="toDoListItem.description">
+      </div>
+      <div class="col-auto">
+        <div *ngIf="!isEditMode">
+          <div class="btn-group-vertical">
+            <button (click)="onEditClick()" type="button" class="btn btn-light">
+              <i class="bi bi-pencil-square" style="line-height: 0; font-size: 40px;"></i>
+            </button>
+            <button (click)="onDeleteClick()" type="button" class="btn btn-light">
+              <i class="bi bi-x-square" style="line-height: 0; font-size: 40px; color:rgb(255, 79, 79)"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
