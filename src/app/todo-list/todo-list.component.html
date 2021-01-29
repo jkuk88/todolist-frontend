@@ -1,1 +1,63 @@
-<p>todo-list works!</p>
+<div class="todo-list-container">
+  <div class="card mb-2 mt-2" style="width: 100%;">
+    <div class="card-header">
+      Szűrés
+    </div>
+    <div class="card-body">
+      <div class="row align-items-center">
+        <div class="col-auto">
+          <div class="form-check">
+            <input (change)="statusFilterClicked(null, $event)" class="form-check-input" type="radio" name="filterStatus" id="filterStatusAll" checked>
+            <label class="form-check-label" for="filterStatusAll">
+              Összes
+            </label>
+          </div>
+        </div>
+        <div class="col-auto">
+          <div class="form-check">
+            <input (change)="statusFilterClicked(true, $event)" class="form-check-input" type="radio" name="filterStatus" id="filterStatusCompleted">
+            <label class="form-check-label" for="filterStatusCompleted">
+              Csak befejezett
+            </label>
+          </div>
+        </div>
+        <div class="col-auto">
+          <div class="form-check">
+            <input (change)="statusFilterClicked(false, $event)" class="form-check-input" type="radio" name="filterStatus" id="filterStatusUncompleted">
+            <label class="form-check-label" for="filterStatusUncompleted">
+              Csak nem befejezett
+            </label>
+          </div>
+        </div>
+        <div class="col">
+          <input [(ngModel)]="filterDescription" (keydown.enter)="onFetchToDoListItems()" type="text" class="form-control" id="filterDescription" placeholder="Szöveges keresés">
+        </div>
+        <div class="col-auto">
+          <button (click)="onFetchToDoListItems()" type="button" class="btn btn-primary">
+            <i class="bi bi-funnel-fill" style="line-height: 0; font-size: 24px;"></i> Szűrés
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <app-todo-list-item *ngFor="let toDoListItem of toDoListItems" [toDoListItem] = "toDoListItem"></app-todo-list-item>
+
+
+  <button (click)="onNewToDoListItemClick()" type="button" class="btn btn-primary">
+    <i class="bi bi-plus-square-fill" style="line-height: 0; font-size: 24px;"></i> Új teendő
+  </button>
+</div>
+<div class="row">
+  <div class="col"></div>
+  <div class="col-auto">
+    <nav aria-label="Page navigation">
+      <ul class="pagination">
+        <li *ngFor="let page of [].constructor(pageCount); let i = index" class="page-item" routerLinkActive="active"><a class="page-link" [routerLink]="'/' + i">{{ i + 1 }}</a></li>
+      </ul>
+    </nav>
+
+  </div>
+  <div class="col"></div>
+</div>
